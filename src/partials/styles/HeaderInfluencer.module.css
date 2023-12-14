@@ -1,0 +1,93 @@
+.Header {
+    position: fixed;
+    top: 0px;left: 0px;right: 0px;
+    height: 70px;
+    box-shadow: 1px 1px 5px 1px #ddd;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 40px;
+    gap: 20px;
+}
+.SideArea {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.Icon {
+    height: 40px;
+}
+.SearchContainer {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+.SearchArea {
+    background-color: #ecf0f1;
+    width: 50%;
+    height: 50px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.SearchInput {
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background: none;
+    height: 50px;
+    font-size: 16px;
+    color: #212121;
+    padding: 0px 20px;
+}
+.SearchButton {
+    padding: 0px;
+    background: none;
+    border: none;
+    height: 50px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.Button,.PhotoProfile {
+    height: 50px;
+    aspect-ratio: 1;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    cursor: pointer;
+    position: relative;
+}
+
+.Label {
+    background-color: #ecf0f1;
+    border-radius: 999px;
+    padding: 0px 25px;
+    height: 40px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+.PhotoProfile {
+    object-fit: cover;
+}
+.ProfileDownIndicator {
+    position: absolute;
+    bottom: -5px;right: 0px;
+    height: 20px;
+    aspect-ratio: 1;
+    background-color: #ecf0f1;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

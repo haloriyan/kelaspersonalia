@@ -1,0 +1,26 @@
+.Content {
+    position: fixed;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.Title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333;
+    margin: 0px;
+}
+.Description {
+    font-size: 16px;
+    color: #444;
+    font-weight: 400;
+}
+.Code {
+    font-size: 80px;
+    font-weight: 800;
+    color: #aaa;
+    margin-bottom: 20px;
+}

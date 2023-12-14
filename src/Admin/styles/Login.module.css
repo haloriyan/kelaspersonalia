@@ -1,0 +1,26 @@
+.Area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.Container {
+    width: 40%;
+    margin-top: 100px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 40px;
+}
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 480px) {
+    .Container {
+        width: 100%;
+        margin-top: 70px;
+        padding: 20px;
+        border: none;
+    }
+}

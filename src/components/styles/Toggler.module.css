@@ -1,0 +1,32 @@
+.Area {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+.Option {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+.OptionActive {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+    .Option {
+        display: flex;
+        flex-grow: 1;
+    }
+    .Area {
+        width: 100%;
+    }
+}

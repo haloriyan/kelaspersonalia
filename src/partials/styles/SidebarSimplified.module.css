@@ -1,0 +1,55 @@
+.Sidebar {
+    position: fixed;
+    left: 0px;bottom: 0px;top: 70px;
+    width: 6%;
+    border-right: 1px solid #ddd;
+}
+.MenuArea {
+    padding: 20px;
+    display: block;
+    flex-direction: column;
+    gap: 20px;
+}
+.MenuItem {
+    display: flex;
+    flex-grow: 1;
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+}
+.MenuItem img {
+    width: 50%;
+}
+.MenuActive {
+    background-color: #f0f0f0;
+    font-weight: 700;
+}
+
+.OrganizerArea {
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.OrganizerLogo {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background-color: #ddd;
+    cursor: pointer;
+}
+.CreateOrganizerButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media (max-width: 480px) {
+    .Sidebar {
+        display: none;
+    }
+}

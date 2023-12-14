@@ -1,0 +1,104 @@
+.BreadCrumb {
+    background-color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    gap: 20px;
+}
+.BreadCrumbItem {
+    color: #2196f3;
+    text-decoration: none;
+}
+
+.JumboContainer {
+    position: relative;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.JumboContent {
+    position: absolute;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
+    background: linear-gradient(to right, #fff 40%, #ffffffcc 90%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 40px;
+    z-index: 2;
+}
+.JumboTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0px;
+}
+.JumboCover {
+    position: absolute;
+    top: 0px;right: 0px;
+    height: 250px;
+    width: 70%;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    z-index: 1;
+}
+.JumboCoverImage {
+    transform: scale(1.25);
+}
+
+.JumboCard {
+    position: absolute;
+    top: 40px;right: 80px;
+    z-index: 3;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    width: 350px;
+}
+.JumboCardImage {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.MateriArea {
+    background-color: #eee;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.MateriItem {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+.MateriImage {
+    height: 80px;
+    border-radius: 8px;
+    aspect-ratio: 16/9;
+}
+
+@media (max-width: 480px) {
+    .JumboCard {
+        top: 20px;right: 20px;left: 20px;
+        width: auto;
+    }
+    .InnerContent {
+        margin-top: 40px;
+    }
+    .BreadCrumbItem {
+        font-size: 12px;
+    }
+    .MateriItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

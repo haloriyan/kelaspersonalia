@@ -1,0 +1,52 @@
+.Container {
+    position: relative;
+}
+.Label {
+    font-size: 12px;
+    color: #888;
+    /* margin-top: 20px; */
+}
+.Input {
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    background: none;
+    font-size: 14px;
+    color: #252525;
+    transition: 0.4s;
+    cursor: pointer;
+    outline: none;
+}
+.Input:focus { border: none; }
+.BottomLine {
+    height: 2px;
+    background-color: #e74c3c;
+    width: 0%;
+    transition: 0.4s;
+}
+.Container:has(input:focus) .BottomLine,
+.Container:has(textarea:focus) .BottomLine {
+    width: 100%;
+}
+
+.Calendar {
+    position: absolute;
+    left: 0px;
+    min-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px 1px #eee;
+}
+.CalendarTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.TopLeft {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}

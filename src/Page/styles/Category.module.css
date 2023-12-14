@@ -1,0 +1,52 @@
+.Jumbo {
+    position: relative;
+}
+.JumboCover {
+    width: 100%;
+    aspect-ratio: 5/2;
+    object-fit: cover;
+    filter: blur(3px);
+}
+.JumboContent {
+    position: absolute;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
+    background-color: #000000bb;
+    color: #fff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-end;
+}
+.JumboTitle {
+    font-size: 32px;
+    margin: 0px;
+    font-weight: 800;
+}
+.Section { padding: 40px; }
+.CourseContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.CourseItem {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 22%;
+    flex-direction: column;
+    text-decoration: none;
+    max-width: 19%;
+}
+.CourseCover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.CourseTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0px;
+    margin-top: 10px;
+}

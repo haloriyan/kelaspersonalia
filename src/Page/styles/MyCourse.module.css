@@ -1,0 +1,30 @@
+.Area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.Item {
+    box-shadow: 1px 1px 5px 1px #ddd;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    gap: 20px;
+}
+.Cover {
+    height: 120px;
+    border-radius: 12px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.CourseTitle {
+    font-size: 18px;
+    font-weight: 800;
+    color: #333;
+}
+.CourseDetail {
+    font-size: 15px;
+    color: #666;
+}

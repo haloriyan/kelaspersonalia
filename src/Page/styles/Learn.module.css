@@ -1,0 +1,84 @@
+.Top {
+    display: flex;
+    flex-direction: row;
+}
+.VideoArea {
+    width: 60%;
+    min-width: 60%;
+    background-color: #000;
+    aspect-ratio: 16/9;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.VideoControl {
+    position: absolute;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
+    background: linear-gradient(to top, #000000 10%, #00000000 70%);
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    justify-content: center;
+    opacity: 0.01;
+    transition: 0.4s;
+}
+.VideoArea:hover .VideoControl { opacity: 1; }
+.ControlButton {
+    height: 60px;
+    font-size: 12px;
+    aspect-ratio: 1;
+    border-radius: 99px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #555;
+}
+.Right {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.MaterialContainer {
+    margin-top: 20px;
+    height: 420px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.MaterialItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    height: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+.Player {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+@media (max-width: 480px) {
+    .Top {
+        display: flex;
+        flex-direction: column;
+    }
+    .VideoArea {
+        width: 100%;
+    }
+    .ControlButton {
+        height: 40px;
+    }
+}

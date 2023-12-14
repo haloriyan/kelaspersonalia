@@ -1,0 +1,46 @@
+.Footer {
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #581a53;
+    color: #fff;
+}
+.Section,.Info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.Info {
+    max-width: 40%;
+    display: block;
+}
+.Logo {
+    height: 50px;
+}
+.InfoDescription {
+    font-size: 14px;
+    line-height: 26px;
+    margin-top: 40px;
+}
+.Title {
+    font-size: 24px;
+    font-weight: 800;
+}
+.LinkArea { margin-top: 20px; }
+.Link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 36px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+    .Footer {
+        padding: 20px;
+        flex-direction: column;
+    }
+}

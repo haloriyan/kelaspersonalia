@@ -1,0 +1,16 @@
+.modal_container {
+    position: fixed;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
+    background-color: #00000070;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+.modal_body {
+    width: 50%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+}
