@@ -22,6 +22,7 @@ const Register = ({callback}) => {
 
     return (
         <form action="#" onSubmit={submit} style={{display: 'flex',flexDirection: 'column',gap: 20}}>
+            <h3>Daftar</h3>
             <Input label="Nama" value={name} onInput={e => setName(e.currentTarget.value)} required />
             <Input label="Email" value={email} onInput={e => setEmail(e.currentTarget.value)} required type="email" />
             <Input label="Password" value={password} onInput={e => setPassword(e.currentTarget.value)} required type="password" />

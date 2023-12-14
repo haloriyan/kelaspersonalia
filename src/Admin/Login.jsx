@@ -13,8 +13,18 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState(null);
 
+    const [admin, setAdmin] = useState(null);
+
+    useEffect(() => {
+        if (admin === null) {
+            let a = window.localStorage.getItem('admin_data');
+            if (a !== null) {
+                navigate('/admin/dashboard');
+            }
+        }
+    })
+
     const submit = (e) => {
-        console.log('submitting', email, password);
         axios.post(`${config.baseUrl}/api/user/login`, {
             email, password
         })

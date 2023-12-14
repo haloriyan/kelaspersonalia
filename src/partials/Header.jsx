@@ -27,7 +27,7 @@ const Header = ({expand = true, title = ''}) => {
         <>
             <div className={styles.HeaderMobile}>
                 <div className={styles.LogoArea}>
-                    <img src="/images/logo.png" alt="Logo Agendakota" className={styles.Logo} />
+                    <img src="/icon.png" alt="Logo Kelas Personalia" className={styles.Logo} />
                 </div>
                 <div className={styles.Toggler} onClick={() => setMenuMobileActive(!isMenuMobileActive)}>
                     <BiMenu />
@@ -36,15 +36,15 @@ const Header = ({expand = true, title = ''}) => {
             <div className={`${styles.MenuMobile} ${isMenuMobileActive ? styles.MenuMobileActive : ''}`}>
                 <a href="#" className={styles.MenuMobileItem} style={{borderWidth: 1,borderStyle: 'solid',borderColor: '#ddd'}}>
                     <BiCompass size={20} />
-                    Explore Events
+                    Menu A
                 </a>
                 <a href="#" className={styles.MenuMobileItem}>
                     <BiQrScan size={20} />
-                    QR Check-in
+                    Menu B
                 </a>
                 <a href="#" className={styles.MenuMobileItem}>
                     <BiGroup size={20} />
-                    Invitations
+                    Menu Cs
                 </a>
 
                 <div className={styles.Separator} style={{margin: '20px 0px',width: '100%'}}></div>
@@ -54,11 +54,11 @@ const Header = ({expand = true, title = ''}) => {
                 </div>
 
                 <div className={styles.ProfileMenu}>
-                    <a href="/profile" className={`${styles.ProfileMenuItem} ${styles.ProfileMenuItemActive}`}>
+                    <a href="#" className={`${styles.ProfileMenuItem} ${styles.ProfileMenuItemActive}`}>
                         <BiUser />
                         Profile
                     </a>
-                    <a href="/settings" className={`${styles.ProfileMenuItem}`}>
+                    <a href="#" className={`${styles.ProfileMenuItem}`}>
                         <BiCog />
                         
                         Settings
@@ -74,7 +74,7 @@ const Header = ({expand = true, title = ''}) => {
                 {
                     expand &&
                     <div className={styles.LogoArea}>
-                        <img src="/images/logo.png" alt="Logo Agendakota" className={styles.Logo} />
+                        <img src="/icon.png" alt="Logo Kelas Personalia" className={styles.Logo} />
                     </div>
                 }
                 <div className={styles.Left}>
@@ -83,15 +83,15 @@ const Header = ({expand = true, title = ''}) => {
                 <div className={styles.Right}>
                     <a href="#" className={styles.Item} style={{border: '1px solid #ddd'}}>
                         <BiCompass />
-                        Explore Events
+                        Menu A
                     </a>
                     <a href="#" className={styles.Item}>
                         <BiQr />
-                        QR Check-in
+                        Menu B
                     </a>
                     <a href="#" className={styles.Item}>
                         <BiNote />
-                        Invitation
+                        Menu C
                     </a>
                     <div className={styles.ProfileIcon} onClick={() => setProfileActive(!isProfileActive)} style={{backgroundImage: 'url(https://i1.sndcdn.com/avatars-000225426854-qk8agf-t500x500.jpg)'}}></div>
                 </div>
@@ -99,11 +99,11 @@ const Header = ({expand = true, title = ''}) => {
             {
                 isProfileActive &&
                 <div className={styles.ProfileMenu}>
-                    <a href="/profile" className={`${styles.ProfileMenuItem} ${styles.ProfileMenuItemActive}`}>
+                    <a href="#" className={`${styles.ProfileMenuItem} ${styles.ProfileMenuItemActive}`}>
                         <BiUser />
                         Profile
                     </a>
-                    <a href="/settings" className={`${styles.ProfileMenuItem}`}>
+                    <a href="#" className={`${styles.ProfileMenuItem}`}>
                         <BiCog />
                         
                         Settings

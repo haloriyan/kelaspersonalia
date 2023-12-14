@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles/Learn.module.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import config from "../config";
 import HeaderPage from "../partials/HeaderPage";
@@ -20,7 +20,9 @@ const Learn = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [index, setIndex] = useState(searchParams.get('i'));
     const [isLoading, setLoading] = useState(true);
+    const [hittingPath, setHittingPath] = useState(false);
     const videoRef = useRef(null);
+    const [material, setMaterial] = useState(null);
 
     const [enroll, setEnroll] = useState(null);
     const [user, setUser] = useState(null);
@@ -42,7 +44,8 @@ const Learn = () => {
         if (isLoading && user !== null) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/page/learn`, {
-                enroll_id: enrollID
+                enroll_id: enrollID,
+                hit_path: false,
             })
             .then(response => {
                 let res = response.data;
@@ -50,9 +53,25 @@ const Learn = () => {
                     navigate('/error/401');
                 }
                 setEnroll(res.enroll);
+                setMaterial(res.enroll.course.materials[index]);
+                setHittingPath(true);
             })
         }
     }, [isLoading, user]);
+
+    useEffect(() => {
+        if (hittingPath && material !== null) {
+            setHittingPath(false);
+            axios.post(`${config.baseUrl}/api/page/learn`, {
+                enroll_id: enrollID,
+                material_id: material.id,
+                hit_path: true,
+            })
+            .then(response => {
+                let res = response.data;
+            })
+        }
+    }, [hittingPath, material]);
 
     const togglePlayPause = () => {
         if (videoRef.current.paused) {
@@ -67,18 +86,16 @@ const Learn = () => {
         }
     }
 
-    const material = enroll?.course.materials[index];
-
     return (
         <>
             <HeaderPage />
             {
-                enroll !== null &&
+                (enroll !== null && material !== null) &&
                 <div className="content" style={{top: 75}}>
                     <div className={styles.Top}>
                         <div className={styles.VideoArea}>
                             <video className={styles.Player} ref={videoRef}>
-                                <source src={`${config.baseUrl}/api/page/stream/${enroll.course.materials[index].id}`} />
+                                <source src={`${config.baseUrl}/api/page/stream/${material.id}`} />
                             </video>
                             <div className={styles.VideoControl}>
                                 <div className={styles.ControlButton} onClick={() => {

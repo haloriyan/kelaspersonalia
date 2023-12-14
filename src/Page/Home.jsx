@@ -11,6 +11,10 @@ const Home = () => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
+        document.title = "Home - Kelas Personalia"
+    });
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/page/home`)

@@ -13,8 +13,13 @@ const Course = () => {
     const navigate = useNavigate();
     const [course, setCourse] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    const [pageTitle, setPageTitle] = useState("Detail Pelatihan - Kelas Personalia");
 
     const [viewing, setViewing] = useState('Deskripsi');
+
+    useEffect(() => {
+        document.title = pageTitle;
+    }, [pageTitle])
 
     useEffect(() => {
         if (isLoading) {
@@ -25,6 +30,7 @@ const Course = () => {
             .then(response => {
                 let res = response.data;
                 setCourse(res.course);
+                setPageTitle(`${res.course.title} - Kelas Personalia`);
             })
         }
     }, [isLoading]);

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import AdminMiddleware from "../Middleware/Admin";
@@ -19,6 +19,7 @@ import Peserta from "./Master/Peserta";
 const AdminRouter = () => {
     return (
         <Routes>
+            <Route path="/admin" element={<Navigate to={'/admin/login'} />} />
             <Route path="/admin/login" Component={Login} />
             <Route path="/admin/logout" Component={Logout} />
             

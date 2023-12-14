@@ -28,3 +28,21 @@
     font-size: 15px;
     color: #666;
 }
+
+.ProgressArea {
+    height: 20px;
+    width: 150px;
+    background-color: #dedede;
+    border-radius: 999px;
+}
+.ProgressBar {
+    height: 20px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
