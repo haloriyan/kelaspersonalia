@@ -21,7 +21,7 @@
     justify-content: flex-end;
     align-items: center;
     flex-grow: 1;
-    gap: 10px;
+    gap: 20px;
 }
 .Item {
     padding: 0px 15px;
@@ -39,10 +39,15 @@
 .ProfileIcon {
     height: 50px;
     aspect-ratio: 1;
-    background-color: #ddd;
+    background-color: #581a53;
+    color: #fff;
     border-radius: 8px;
     cursor: pointer;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
 }
 
 .ProfileMenu {
@@ -145,7 +150,7 @@
         display: flex;
         position: fixed;
         top: 80px;left: 0px;bottom: 0px;
-        width: 100%;
+        width: 90%;
         left: 100%;
         background-color: #fff;
         padding: 20px;

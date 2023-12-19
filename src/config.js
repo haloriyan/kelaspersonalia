@@ -3,9 +3,9 @@ const config = {
     // baseUrl: 'http://127.0.0.1:8000',
     baseUrl: 'https://app.kelaspersonalia.com',
     blogUrl: 'https://dailyhotels.id/wp-json/wp/v2',
-    primaryColor: '#CA0C64',
+    primaryColor: '#581a53',
     colors: {
-        primary: '#CA0C64',
+        primary: '#581a53',
         green: '#2ecc71',
         grey: '#ddd',
         red: '#e74c3c',

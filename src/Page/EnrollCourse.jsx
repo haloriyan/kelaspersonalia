@@ -100,7 +100,6 @@ const EnrollCourse = () => {
                             {
                                 viewingForm === 'register' &&
                                 <Register callback={res => {
-                                    console.log(res);
                                     let u = res.user;
                                     window.localStorage.setItem('user_data', JSON.stringify(u));
                                     setHasLoggedIn(true);

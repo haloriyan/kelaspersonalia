@@ -14,6 +14,10 @@ const MyCourse = () => {
     const [enrolls, setEnrolls] = useState([]);
 
     useEffect(() => {
+        document.title = "Pelatihan Saya - Kelas Personalia"
+    }, []);
+
+    useEffect(() => {
         if (user === null) {
             setUser(
                 JSON.parse(window.localStorage.getItem('user_data'))

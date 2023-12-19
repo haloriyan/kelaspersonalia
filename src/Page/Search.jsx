@@ -21,6 +21,10 @@ const Search = () => {
     const [raw, setRaw] = useState(null);
 
     useEffect(() => {
+        document.title = `Mencari '${searchParams.get('q')}' - Kelas Personalia`;
+    }, [searchParams])
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/page/search`, {
@@ -39,6 +43,7 @@ const Search = () => {
             <HeaderPage />
             <div className="content">
                 <div className="inner_content">
+                    <h2 style={{marginTop: 0,marginBottom: 40,fontSize: 24}}>Mencari '{searchParams.get('q')}'</h2>
                     <div className={courseStyles.ListContainer}>
                         {
                             courses.map((cour, c) => (

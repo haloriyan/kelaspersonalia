@@ -23,9 +23,14 @@ const Learn = () => {
     const [hittingPath, setHittingPath] = useState(false);
     const videoRef = useRef(null);
     const [material, setMaterial] = useState(null);
+    const [pageTitle, setPageTitle] = useState('Materi Pelatihan');
 
     const [enroll, setEnroll] = useState(null);
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        document.title = `${pageTitle} - Kelas Personalia`;
+    })
 
     useEffect(() => {
         document.addEventListener('keydown', handleKeyboard);
@@ -49,12 +54,14 @@ const Learn = () => {
             })
             .then(response => {
                 let res = response.data;
+                let material = res.enroll.course.materials[index];
                 if (res.enroll.user_id !== user.id) {
                     navigate('/error/401');
                 }
                 setEnroll(res.enroll);
-                setMaterial(res.enroll.course.materials[index]);
+                setMaterial(material);
                 setHittingPath(true);
+                setPageTitle(`${material.title}`);
             })
         }
     }, [isLoading, user]);
