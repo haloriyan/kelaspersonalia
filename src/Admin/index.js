@@ -10,11 +10,15 @@ import CourseDetail from "./Master/CourseDetail";
 import CourseMaterial from "./Master/Course/Material";
 import CourseParticipant from "./Master/Course/Participant";
 import CourseMedia from "./Master/Course/Media";
+import CourseExam from "./Master/Course/Exam";
 import CourseSettings from "./Master/Course/Settings";
 
 import Category from "./Master/Category";
 import Coupon from "./Master/Coupon";
 import Peserta from "./Master/Peserta";
+import Enroll from "./Statistic/Enroll";
+import CourseCertificate from "./Master/Course/Certificate";
+import CourseEvent from "./Master/Course/Event";
 
 const AdminRouter = () => {
     return (
@@ -30,12 +34,17 @@ const AdminRouter = () => {
             <Route path="/admin/master/course/:id/materi" element={<AdminMiddleware><CourseMaterial /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/peserta" element={<AdminMiddleware><CourseParticipant /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/media" element={<AdminMiddleware><CourseMedia /></AdminMiddleware>} />
+            <Route path="/admin/master/course/:id/certificate" element={<AdminMiddleware><CourseCertificate /></AdminMiddleware>} />
+            <Route path="/admin/master/course/:id/event" element={<AdminMiddleware><CourseEvent /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/settings" element={<AdminMiddleware><CourseSettings /></AdminMiddleware>} />
+            <Route path="/admin/master/course/:id/exam" element={<AdminMiddleware><CourseExam /></AdminMiddleware>} />
             
             <Route path="/admin/master/category" element={<AdminMiddleware><Category /></AdminMiddleware>} />
             
             <Route path="/admin/master/coupon" element={<AdminMiddleware><Coupon /></AdminMiddleware>} />
             <Route path="/admin/master/peserta" element={<AdminMiddleware><Peserta /></AdminMiddleware>} />
+
+            <Route path="/admin/statistic/enroll" element={<AdminMiddleware><Enroll /></AdminMiddleware>} />
         </Routes>
     )
 }

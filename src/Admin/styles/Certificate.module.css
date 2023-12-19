@@ -1,0 +1,27 @@
+.Area {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.Left {
+    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
+}
+.TemplateContainer {
+    position: relative;
+}
+.TemplateName {
+    position: absolute;
+    left: 0px;right: 0px;
+    text-align: center;
+}
+.TemplateImage {
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .Area {
+        flex-direction: column;
+    }
+}

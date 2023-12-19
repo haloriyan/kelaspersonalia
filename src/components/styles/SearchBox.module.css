@@ -1,0 +1,25 @@
+.SearchArea {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+}
+.SearchInput {
+    background: none;
+    border: none;
+    outline: none;
+    height: 20px;
+    padding: 10px 20px;
+    width: 240px;
+}
+.SearchButton {
+    height: 40px;
+    aspect-ratio: 1;
+    background-color: #eee;
+    border: none;
+    box-sizing: border-box;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    cursor: pointer;
+    color: #444;
+}

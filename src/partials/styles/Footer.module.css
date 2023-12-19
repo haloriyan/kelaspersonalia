@@ -40,7 +40,10 @@
 
 @media (max-width: 480px) {
     .Footer {
-        padding: 20px;
+        padding: 40px 20px;
         flex-direction: column;
+    }
+    .Info {
+        max-width: 100%;
     }
 }

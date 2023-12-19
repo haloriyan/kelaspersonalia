@@ -1,14 +1,15 @@
 import { BiCog, BiCompass, BiGroup, BiLogOut, BiMenu, BiNote, BiQr, BiQrScan, BiSearch, BiUser } from "react-icons/bi";
 import styles from "./styles/HeaderPage.module.css";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 const HeaderPage = ({expand = true, title = ''}) => {
     const { query } = useParams();
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [isProfileActive, setProfileActive] = useState(false);
     const [isMenuMobileActive, setMenuMobileActive] = useState(false);
-    const [q, setQ] = useState(query);
+    const [q, setQ] = useState(searchParams.get('q'));
 
     const handleClick = e => {
         let target = e.target;
@@ -23,7 +24,7 @@ const HeaderPage = ({expand = true, title = ''}) => {
     }
 
     const search = () => {
-        navigate(`/search/${q}`);
+        navigate(`/search?=${q}`);
     }
 
     useEffect(() => {
@@ -87,7 +88,7 @@ const HeaderPage = ({expand = true, title = ''}) => {
                 }
                 <div className={styles.Left}>
                     <form className={styles.SearchArea} onSubmit={search}>
-                        <input type="text" className={styles.SearchInput} value={q} onInput={e => setQ(e.currentTarget.value)} />
+                        <input type="text" name="q" className={styles.SearchInput} value={q} onInput={e => setQ(e.currentTarget.value)} placeholder="Ketik dan tekan enter" />
                         <button className={styles.SearchButton}>
                             <BiSearch />
                         </button>

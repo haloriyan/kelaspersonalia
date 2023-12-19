@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles/CourseMenu.module.css";
-import { BiChevronLeft, BiCog, BiFile, BiGroup, BiHome, BiImage } from "react-icons/bi";
+import { BiCertification, BiChevronLeft, BiCog, BiEdit, BiFile, BiGroup, BiHome, BiImage, BiListUl, BiParagraph } from "react-icons/bi";
 import Separator from "../components/Separator";
 import Substring from "../components/Substring";
 
@@ -30,6 +30,10 @@ const CourseMenu = ({active, course = null}) => {
                         <BiImage />
                         <div className={styles.MenuText}>Media</div>
                     </a>
+                    <a href={`/admin/master/course/${course.id}/certificate`} className={`${styles.MenuItem} ${active === 'certificate' ? styles.MenuActive : ''}`}>
+                        <BiCertification />
+                        <div className={styles.MenuText}>Sertifikat</div>
+                    </a>
                     <a href={`/admin/master/course/${course.id}/peserta`} className={`${styles.MenuItem} ${active === 'peserta' ? styles.MenuActive : ''}`}>
                         <BiGroup />
                         <div className={styles.MenuText}>Peserta</div>
@@ -39,16 +43,24 @@ const CourseMenu = ({active, course = null}) => {
                         <div className={styles.MenuText}>Pengaturan</div>
                     </a>
 
-                    <div style={{color: '#999',fontSize: 14,fontWeight: 600,margin: '20px 0px'}}>
-                        Report
+                    <div style={{color: '#999',fontSize: 12,fontWeight: 600,margin: '20px 0px 10px 0px'}}>
+                        Ujian
                     </div>
-                    <a href="/event/selling" className={`${styles.MenuItem} ${active === 'selling' ? styles.MenuActive : ''}`}>
-                        <BiHome />
-                        <div className={styles.MenuText}>Selling</div>
+                    <a href={`/admin/master/course/${course.id}/exam`} className={`${styles.MenuItem} ${active === 'exam' ? styles.MenuActive : ''}`}>
+                        <BiListUl />
+                        <div className={styles.MenuText}>List Pertanyaan</div>
                     </a>
                     <a href="/event/booking" className={`${styles.MenuItem} ${active === 'booking' ? styles.MenuActive : ''}`}>
-                        <BiHome />
-                        <div className={styles.MenuText}>Booking Data</div>
+                        <BiEdit />
+                        <div className={styles.MenuText}>Jawaban</div>
+                    </a>
+
+                    <div style={{color: '#999',fontSize: 12,fontWeight: 600,margin: '20px 0px 10px 0px'}}>
+                        Event / Webinar
+                    </div>
+                    <a href={`/admin/master/course/${course.id}/event`} className={`${styles.MenuItem} ${active === 'event' ? styles.MenuActive : ''}`}>
+                        <BiListUl />
+                        <div className={styles.MenuText}>Event</div>
                     </a>
                 </div>
             </div>

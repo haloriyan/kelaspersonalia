@@ -1,7 +1,15 @@
 import config from "../config";
 import styles from "./styles/Input.module.css";
 
-const Input = ({label = 'Label', icon = null, height = 50, type = 'text', multiline = false, placeholder, onInput, required = true, value = null, style, right = null}) => {
+const Input = ({label = 'Label', icon = null, height = 50, type = 'text', multiline = false, placeholder, onInput, required = true, value = null, style, right = null, exportStyles = false}) => {
+    if (exportStyles) {
+        return {
+            styles: styles,
+            bottomLine: <div style={{display: 'flex',justifyContent: 'center'}}>
+                <div className={styles.BottomLine} style={{backgroundColor: config.primaryColor}}></div>
+            </div>
+        };
+    }
     return (
         <div>
             <div className={styles.Label}>{label}</div>

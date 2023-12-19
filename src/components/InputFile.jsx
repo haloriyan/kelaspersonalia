@@ -26,7 +26,7 @@ const getExtension = (name) => {
 
 const imageExtensions = ['png','jpg','bmp','gif','jpeg'];
 
-const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', label = 'Pilih Berkas...', align = 'left', autoClear = false, onChange}) => {
+const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', label = 'Pilih Berkas...', labelStyle, align = 'left', autoClear = false, onChange}) => {
     const thisRef = useRef(null);
     const prevArea = useRef(null);
     const theAligns = {
@@ -47,7 +47,7 @@ const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', label = 
                 <BiImageAdd size={'30%'} />
                 {
                     label !== "" &&
-                    <div>{label}</div>
+                    <div style={labelStyle}>{label}</div>
                 }
             </div>
             <input type="file" ref={thisRef} className={styles.Input} style={defaultStyle} onChange={e => {

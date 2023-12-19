@@ -1,6 +1,7 @@
 const config = {
     appName: 'Kelas Personalia',
-    baseUrl: 'http://127.0.0.1:8000',
+    // baseUrl: 'http://127.0.0.1:8000',
+    baseUrl: 'https://app.kelaspersonalia.com',
     blogUrl: 'https://dailyhotels.id/wp-json/wp/v2',
     primaryColor: '#CA0C64',
     colors: {

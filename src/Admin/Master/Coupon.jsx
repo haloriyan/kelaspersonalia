@@ -98,7 +98,7 @@ const Coupon = () => {
                         <tr>
                             <th>Kode</th>
                             <th>Terpakai</th>
-                            <th>Amount</th>
+                            <th>Nominal</th>
                             <th></th>
                         </tr>
                     </thead>

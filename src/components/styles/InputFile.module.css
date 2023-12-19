@@ -16,7 +16,7 @@
 }
 .Input {
     position: absolute;
-    top: 0px;left: 0px;
-    opacity: 0.01;
+    top: 0px;left: 0px;right: 0px;bottom: 0px;
     cursor: pointer;
+    opacity: 0.01;
 }

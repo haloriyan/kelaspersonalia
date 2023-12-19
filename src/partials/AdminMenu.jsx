@@ -36,6 +36,14 @@ const AdminMenu = ({active}) => {
                         <div className={styles.MenuText}>Peserta</div>
                     </a>
 
+                    <div style={{color: '#999',fontSize: 14,fontWeight: 600,margin: '20px 0px'}}>
+                        Statistik
+                    </div>
+                    <a href="/admin/statistic/enroll" className={`${styles.MenuItem} ${active === 'enroll' ? styles.MenuActive : ''}`}>
+                        <BiTag />
+                        <div className={styles.MenuText}>Enroll</div>
+                    </a>
+
                 </div>
             </div>
         )

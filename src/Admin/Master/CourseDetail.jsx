@@ -7,6 +7,7 @@ import AdminMenuSimple from "../../partials/AdminMenuSimple";
 import CourseMenu from "../../partials/CourseMenu";
 import styles from "../styles/Course.module.css";
 import { BiChevronRight } from "react-icons/bi";
+import { Card, CardContainer } from "../../components/Card";
 
 const CourseDetail = () => {
     const { id } = useParams();
@@ -42,35 +43,11 @@ const CourseDetail = () => {
             <AdminMenuSimple active={'course'} />
             <CourseMenu course={course} active={'dashboard'} />
             <div className="content organizer">
-                <div className={styles.CardContainer}>
-                    <a href={`/admin/master/course/${course?.id}/peserta`} className={styles.Card}>
-                        <div className={styles.CardNumber}>{enrolls.length}</div>
-                        <div className={styles.CardBottom}>
-                            <div style={{display: 'flex',flexGrow:1}}>
-                                Peserta
-                            </div>
-                            <BiChevronRight />
-                        </div>
-                    </a>
-                    <a href={`/admin/master/course/${course?.id}/peserta`} className={styles.Card}>
-                        <div className={styles.CardNumber}>{completeds.length}x</div>
-                        <div className={styles.CardBottom}>
-                            <div style={{display: 'flex',flexGrow:1}}>
-                                Diselesaikan
-                            </div>
-                            <BiChevronRight />
-                        </div>
-                    </a>
-                    <a href={`/admin/master/course/${course?.id}/peserta`} className={styles.Card}>
-                        <div className={styles.CardNumber}>{enrolls.length}</div>
-                        <div className={styles.CardBottom}>
-                            <div style={{display: 'flex',flexGrow:1}}>
-                                Peserta
-                            </div>
-                            <BiChevronRight />
-                        </div>
-                    </a>
-                </div>
+                <CardContainer>
+                    <Card link={`/admin/master/course/${course?.id}/peserta`} label={'Peserta'} number={enrolls.length} />
+                    <Card link={`/admin/master/course/${course?.id}/peserta`} label={'Penyelesaian'} number={completeds.length} />
+                    <Card link={`/admin/master/course/${course?.id}/peserta`} label={'Peserta'} number={enrolls.length} />
+                </CardContainer>
             </div>
         </>
     )

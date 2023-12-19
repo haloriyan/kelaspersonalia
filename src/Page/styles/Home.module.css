@@ -74,3 +74,22 @@
     margin: 0px;
     margin-top: 10px;
 }
+
+@media (max-width: 480px) {
+    .Jumbo {
+        flex-direction: column-reverse;
+        padding: 40px 20px;
+    }
+    .JumboTitle {
+        font-size: 20px;
+    }
+    .IconOnJumbo {
+        height: 80px;
+    }
+    .JumboContent {
+        max-width: 100%;
+    }
+    .CategoryContainer {
+        flex-direction: column;
+    }
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles/Home.module.css";
+import { useParams, useSearchParams } from "react-router-dom";
 import HeaderPage from "../partials/HeaderPage";
 import axios from "axios";
 import config from "../config";
-import Footer from "../partials/Footer";
 import courseStyles from "../Admin/styles/Course.module.css";
-import { BiListCheck, BiTime } from "react-icons/bi";
 import Substring from "../components/Substring";
+import { BiListCheck, BiTime } from "react-icons/bi";
+import Footer from "../partials/Footer";
 
 const getDuration = duration => {
     let menit = duration / 60;
@@ -14,61 +14,31 @@ const getDuration = duration => {
     return `${Math.floor(menit)}m ${detik}d`;
 }
 
-const Home = () => {
+const Search = () => {
+    const [searchParams] = useSearchParams();
     const [isLoading, setLoading] = useState(true);
-    const [categories, setCategories] = useState([]);
     const [courses, setCourses] = useState([]);
-
-    useEffect(() => {
-        document.title = "Home - Kelas Personalia"
-    });
+    const [raw, setRaw] = useState(null);
 
     useEffect(() => {
         if (isLoading) {
             setLoading(false);
-            axios.post(`${config.baseUrl}/api/page/home`)
+            axios.post(`${config.baseUrl}/api/page/search`, {
+                q: searchParams.get('q'),
+            })
             .then(response => {
                 let res = response.data;
-                setCategories(res.categories);
-                setCourses(res.courses);
+                setRaw(res.courses);
+                setCourses(res.courses.data);
             })
         }
-    }, [isLoading]);
+    }, [isLoading])
 
     return (
         <>
             <HeaderPage />
             <div className="content">
-                <div className={styles.Jumbo}>
-                    <div className={styles.JumboContent}>
-                        <h2 className={styles.JumboTitle}>
-                            Temukan cara memanage organisasi yang bisa membuat perusahaan Anda bertumbuh
-                        </h2>
-                        <div style={{display: 'flex',flexDirection: 'row'}}>
-                            <button className={styles.JumboButton}>Lihat Kelas</button>
-                        </div>
-                    </div>
-                    <div className={styles.JumboIconArea}>
-                        <img src="/icon.png" alt="Icon on Jumbo" className={styles.IconOnJumbo} />
-                    </div>
-                </div>
-
-                <div className={styles.Section}>
-                    <h3 style={{marginTop: 0}}>Kategori Kelas</h3>
-                    <div className={styles.CategoryContainer}>
-                        {
-                            categories.map((cat, c) => (
-                                <a key={c} className={styles.CategoryItem} href={`/category/${cat.id}`}>
-                                    <img src={`${config.baseUrl}/storage/category_covers/${cat.cover}`} alt={cat.name} className={styles.CategoryCover} />
-                                    <div className={styles.CategoryName}>{cat.name}</div>
-                                </a>
-                            ))
-                        }
-                    </div>
-                </div>
-
-                <div className={styles.Section}>
-                    <h3 style={{marginTop: 0}}>Pelatihan Terbaru</h3>
+                <div className="inner_content">
                     <div className={courseStyles.ListContainer}>
                         {
                             courses.map((cour, c) => (
@@ -93,10 +63,12 @@ const Home = () => {
                     </div>
                 </div>
 
+                <div style={{height: 60}}></div>
+
                 <Footer />
             </div>
         </>
     )
 }
 
-export default Home;
+export default Search;
