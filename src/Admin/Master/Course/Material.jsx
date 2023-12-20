@@ -26,8 +26,8 @@ const CourseMaterial = () => {
     const [materials, setMaterials] = useState([]);
     const [material, setMaterial] = useState(null);
 
-    const [title, setTitle] = useState('Pendahuluan');
-    const [description, setDescription] = useState('Lorem ipsum aja dulu');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [video, setVideo] = useState(null);
     const inputRef = useRef(null);
 

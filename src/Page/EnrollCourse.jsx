@@ -9,6 +9,7 @@ import Separator from "../components/Separator";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Alert from "../components/Alert";
+import Login from "../partials/Login";
 
 const EnrollCourse = () => {
     const { courseID } = useParams();
@@ -66,24 +67,30 @@ const EnrollCourse = () => {
         e.preventDefault();
     }
 
+    const authCallback = (res) => {
+        let u = res.user;
+        window.localStorage.setItem('user_data', JSON.stringify(u));
+        setHasLoggedIn(true);
+        setUser(u);
+    }
+
     return (
         <>
             <HeaderPage />
             <div className="content">
                 <div className={styles.Area}>
-                    {
-                        hasLoggedIn ?
-                        <div className={styles.Content}>
-                            <h2 style={{fontSize: 20,fontWeight: 700,margin: 0}}>Enroll Pelatihan</h2>
+                    <div className={styles.Content}>
+                        <h2 style={{fontSize: 20,fontWeight: 700,margin: 0}}>Enroll Pelatihan</h2>
+                        {
+                            course !== null &&
+                            <div style={{marginTop: 20}}>
+                                <img src={`${config.baseUrl}/storage/cover_images/${course.cover_image}`} alt={course.title} className={styles.Cover} />
+                                <div className={styles.CourseTitle}>{course.title}</div>
 
-                            {
-                                course !== null &&
-                                <div style={{marginTop: 20}}>
-                                    <img src={`${config.baseUrl}/storage/cover_images/${course.cover_image}`} alt={course.title} className={styles.Cover} />
-                                    <div className={styles.CourseTitle}>{course.title}</div>
+                                <Separator width="20%" />
 
-                                    <Separator width="20%" />
-
+                                {
+                                    hasLoggedIn &&
                                     <form action="#" onSubmit={roll}>
                                         <Input label="Token :" value={code} onInput={e => setCode(e.currentTarget.value)} required />
                                         {
@@ -92,26 +99,26 @@ const EnrollCourse = () => {
                                         }
                                         <Button style={{marginTop: 20}}>Enroll</Button>
                                     </form>
-                                </div>
-                            }
-                        </div>
-                        :
-                        <div className={styles.Content}>
-                            {
-                                viewingForm === 'register' &&
-                                <Register callback={res => {
-                                    let u = res.user;
-                                    window.localStorage.setItem('user_data', JSON.stringify(u));
-                                    setHasLoggedIn(true);
-                                    setUser(u);
-                                }} />
-                            }
-                            {
-                                viewingForm === 'login' &&
-                                <Register />
-                            }
-                        </div>
-                    }
+                                }
+                                {
+                                    (!hasLoggedIn && viewingForm === 'login') && <>
+                                        <Login callback={authCallback} />
+                                        <div style={{marginTop: 20}}>
+                                            Belum punya akun? <span style={{color: config.primaryColor,cursor: 'pointer',fontWeight: '700'}} onClick={() => setViewingForm('register')}>Register</span>
+                                        </div>
+                                    </>
+                                }
+                                {
+                                    (!hasLoggedIn && viewingForm === 'register') && <>
+                                        <Register callback={authCallback} />
+                                        <div style={{marginTop: 20}}>
+                                            Sudah punya akun? <span style={{color: config.primaryColor,cursor: 'pointer',fontWeight: '700'}} onClick={() => setViewingForm('login')}>Login</span>
+                                        </div>
+                                    </>
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
 
                 <div style={{height: 40}}></div>

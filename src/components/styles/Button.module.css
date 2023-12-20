@@ -14,8 +14,8 @@
     /* width: 100%; */
 }
 .ButtonPrimary {
-    background-color: #CA0C64;
-    border: 1px solid #CA0C64;
+    background-color: #581a53;
+    border: 1px solid #581a53;
     color: #fff;
 }
 .ButtonPrimary.red {
@@ -32,8 +32,8 @@
 
 .ButtonSecondary {
     background-color: #fff;
-    color: #CA0C64;
-    border: 1px solid #CA0C64;
+    color: #581a53;
+    border: 1px solid #581a53;
 }
 .ButtonSecondary.red {
     background-color: #fff;
@@ -46,7 +46,7 @@
     border: 1px solid #ddd;
 }
 .ButtonSecondary:hover {
-    background-color: #CA0C64;
+    background-color: #581a53;
     color: #fff;
 }
 .ButtonSecondary.red:hover {
@@ -55,16 +55,16 @@
 }
 .ButtonSecondary.muted:hover {
     background-color: #fff;
-    color: #CA0C64;
+    color: #581a53;
     font-weight: 700;
 }
 .ButtonTertiary {
     background-color: #fff;
-    color: #CA0C64;
+    color: #581a53;
     font-weight: 700;
 }
 .ButtonTertiary:hover {
-    background-color: #CA0C6430;
+    background-color: #581a5330;
 }
 .ButtonTertiary.red {
     background-color: #fff;
