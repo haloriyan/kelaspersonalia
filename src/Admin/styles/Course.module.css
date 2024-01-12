@@ -88,6 +88,25 @@
 }
 .TheVideoInput { display: none; }
 
+.ModulContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.ModulDetail {
+    display: flex;
+    flex-direction: column;
+    min-width: 55%;
+    padding: 20px;
+    box-shadow: 1px 1px 5px 1px #ddd;
+    border-radius: 12px;
+}
+.ModulLeft {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .MaterialContainer {
     display: flex;
     flex-direction: column;
@@ -107,6 +126,16 @@
     height: 80px;
     aspect-ratio: 16/9;
     border-radius: 6px;
+}
+.MaterialLeftControl {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
+.MaterialLeftControl div {
+    cursor: pointer;
 }
 
 .CardContainer {

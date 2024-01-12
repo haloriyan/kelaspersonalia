@@ -1,0 +1,143 @@
+.Container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.LeftContent {
+    width: 30%;
+    min-width: 30%;
+}
+.CourseInfoCard {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 1px 1px 5px 1px #ddd;
+    width: 100%;
+}
+.CourseCover {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.CourseTitle {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+.CreateButton {
+    background-color: #581a5330;
+    color: #581a53;
+    height: 44px;
+    border: none;
+    padding: 0px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 999px;
+}
+
+.RightContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 40px;
+}
+
+.PostBox {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px 1px #ddd;
+}
+.UserIcon {
+    height: 40px;
+    font-weight: 800;
+    aspect-ratio: 1;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.PostTop {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+    font-size: 12px;
+    color: #888;
+}
+.UserName {
+    font-size: 16px;
+    font-weight: 800;
+    color: #212121;
+}
+.Title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #555;
+}
+.Body {
+    font-size: 15px;
+    color: #333;
+}
+.ControlButton {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px 1px #ddd;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    cursor: pointer;
+    text-decoration: none;
+    color: #666;
+    gap: 20px;
+    font-size: 14px;
+}
+.InnerContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.ContainerDetail {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex-grow: 1;
+    max-width: 40%;
+}
+
+.ReplyArea {
+    background-color: #eee;
+    border-radius: 999px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+}
+.ReplyInput {
+    display: flex;
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    height: 36px;
+}
+.ReplyButton {
+    padding: 10px 25px;
+    border-radius: 999px;
+    background-color: #581a53;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .Container {
+        max-width: 90%;
+    }
+}

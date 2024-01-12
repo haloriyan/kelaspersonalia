@@ -12,13 +12,19 @@ import Toggler from "../../components/Toggler";
 import { useDebouncedCallback } from "use-debounce";
 import InArray from "../../components/InArray";
 import Currency from "../../components/Currency";
+import Pagination from "../../components/Pagination";
+import SearchBox from "../../components/SearchBox";
+import { useSearchParams } from "react-router-dom";
 
 const Coupon = () => {
+    const [searchParams] = useSearchParams();
     const [isLoading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(null);
     const [courses, setCourses] = useState([]);
     const [coupons, setCoupons] = useState([]);
-    const [q, setQ] = useState('');
+    const [raw, setRaw] = useState(null);
+    const [q, setQ] = useState(searchParams.get('q'));
+    const [page, setPage] = useState(1);
 
     const [code, setCode] = useState('');
     const [type, setType] = useState('%');
@@ -27,6 +33,8 @@ const Coupon = () => {
     const [forCourses, setForCourses] = useState([]);
 
     const [isAdding, setAdding] = useState(false);
+    const [massGenerating, setMassGenerating] = useState(false);
+    const [generateButton, setGenerateButton] = useState('Buat Kupon');
 
     useEffect(() => {
         if (admin === null) {
@@ -37,9 +45,10 @@ const Coupon = () => {
     useEffect(() => {
         if (isLoading && admin !== null) {
             setLoading(false);
-            axios.post(`${config.baseUrl}/api/coupon`)
+            axios.post(`${config.baseUrl}/api/coupon?page=${page}&q=${q}`)
             .then(response => {
                 let res = response.data;
+                setRaw(res.raw);
                 setCoupons(res.coupons);
             })
         }
@@ -79,6 +88,30 @@ const Coupon = () => {
         })
     }, 1000);
 
+    const generateMass = e => {
+        let theForCourses = [];
+        forCourses.map(fc => {
+            theForCourses.push(fc.id);
+        });
+        setGenerateButton('Membuat kupon...');
+        axios.post(`${config.baseUrl}/api/coupon/generate-mass`, {
+            quantity,
+            discount_type: type === '%' ? 'percentage' : 'amount',
+            discount_amount: amount,
+            for_courses_id: theForCourses
+        })
+        .then(response => {
+            let res = response.data;
+            setLoading(true);
+            // setMassGenerating(false);
+            setGenerateButton('Buat Kupon');
+        })
+        .catch(e => {
+            setGenerateButton('Buat Kupon');
+        })
+        e.preventDefault();
+    }
+
     return (
         <>
             <Header />
@@ -86,8 +119,9 @@ const Coupon = () => {
             <div className="content user">
                 <div className="inline">
                     <h2 style={{margin: 0,display: 'flex',flexGrow: 1}}>Kupon</h2>
-                    <Button accent="secondary" onClick={() => setAdding(true)}>
-                        Tambah
+                    <SearchBox q={q} setQ={setQ} />
+                    <Button onClick={() => setMassGenerating(true)}>
+                        Generate Massal
                     </Button>
                 </div>
 
@@ -97,6 +131,7 @@ const Coupon = () => {
                     <thead>
                         <tr>
                             <th>Kode</th>
+                            <th>Kursus</th>
                             <th>Terpakai</th>
                             <th>Nominal</th>
                             <th></th>
@@ -107,6 +142,17 @@ const Coupon = () => {
                             coupons.map((coup, c) => (
                                 <tr key={c}>
                                     <td>{coup.code}</td>
+                                    <td>
+                                        {
+                                            coup.courses.map((cour, c) => (
+                                                <li key={c}>
+                                                    <a href={`/course/${cour.id}`} target="_blank">
+                                                        {cour.title}
+                                                    </a>
+                                                </li>
+                                            ))
+                                        }
+                                    </td>
                                     <td style={{fontSize: 12}}>
                                         {coup.start_quantity - coup.quantity} dari {coup.start_quantity}
                                     </td>
@@ -123,6 +169,30 @@ const Coupon = () => {
                         }
                     </tbody>
                 </table>
+
+                {
+                    raw !== null &&
+                    <div style={{display: 'flex',gap: 20,marginTop: 20}}>
+                        <div style={{display: 'flex',flexGrow: 1}}>
+                            <a href={`${config.baseUrl}/export/coupon`} style={{textDecoration: 'none'}}>
+                                <Button color="green">Download</Button>
+                            </a>
+                        </div>
+                        <Pagination 
+                            style={{marginTop: 0}}
+                            next_page_url={raw.next_page_url}
+                            prev_page_url={raw.prev_page_url}
+                            next={() => {
+                                setPage(page + 1);
+                                setLoading(true);
+                            }}
+                            prev={() => {
+                                setPage(page - 1);
+                                setLoading(true);
+                            }}
+                        />
+                    </div>
+                }
             </div>
 
             {
@@ -208,6 +278,84 @@ const Coupon = () => {
 
                             <Button style={{width: '100%',marginTop: 20}}>Submit</Button>
                         </form>
+                </Popup>
+            }
+
+            {
+                massGenerating &&
+                <Popup onDismiss={() => setMassGenerating(false)}>
+                    <div className="inline" style={{marginBottom: 20}}>
+                        <h2 style={{margin: 0,display: 'flex',flexGrow: 1}}>Generate Kupon Massal</h2>
+                        <Button circle accent="secondary" color="muted" onClick={() => setMassGenerating(false)}>
+                            <BiX size={18} />
+                        </Button>
+                    </div>
+
+                    <form action="#" onSubmit={generateMass}>
+                        <Input type="number" label="Jumlah Kupon" value={quantity} onInput={e => setQuantity(e.currentTarget.value)} required />
+                        <div className="inline">
+                            <div style={{marginTop: 20,display: 'flex',flexGrow: 1,flexDirection: 'column'}}>
+                                <div style={{fontSize: 12,color: '#666'}}>Khusus Untuk Pelatihan :</div>
+                                {
+                                    forCourses.length > 0 &&
+                                    <div style={{display: 'flex',gap: 10,flexDirection: 'row',marginTop: 10}}>
+                                        {
+                                            forCourses.map((fc, f) => (
+                                                <div key={f} style={{border: '1px solid #ddd',padding: 10,borderRadius: 6,fontSize: 12,gap: 5,display: 'flex',flexDirection: 'row'}}>
+                                                    {fc.title}
+                                                    <span style={{cursor: 'pointer'}} onClick={() => {
+                                                        let theFc = [...forCourses];
+                                                        theFc.splice(f, 1);
+                                                        setForCourses(theFc);
+                                                    }}>
+                                                        <BiX />
+                                                    </span>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <div style={{display: 'flex',flexDirection: 'row',padding: 5,border: '1px solid #ddd',marginTop: 10,borderRadius: 8}}>
+                                <input style={{display: 'flex',flexGrow: 1,background: 'none',border: 'none',outline: 'none',fontSize: 16}} placeholder="Cari pelatihan" value={q} onInput={e => {
+                                    setQ(e.currentTarget.value);
+                                    search();
+                                }} />
+                            </div>
+                        </div>
+
+                        <div className={styles.CoursesArea}>
+                            {
+                                courses.length > 0 &&
+                                courses.map((cour, c) => {
+                                    if (forCourses.findIndex((f) => f.id === cour.id) < 0) return (
+                                        <div key={c} className={styles.CoursesItem}>
+                                            <img src={`${config.baseUrl}/storage/cover_images/${cour.cover_image}`} alt={cour.title} className={styles.CoursesImage} />
+                                            <div style={{display: 'flex',flexGrow: 1}}>
+                                                <div>{cour.title}</div>
+                                            </div>
+                                            <Button accent="secondary" height={32} type="button" onClick={() => {
+                                                let fc = [...forCourses];
+                                                if (InArray(cour, fc, true)) {
+                                                    const i = fc.findIndex((u) => u.id === cour.id);
+                                                    fc.splice(i, 1);
+                                                } else {
+                                                    fc.push(cour);
+                                                }
+                                                setQ('');
+                                                setCourses([]);
+                                                setForCourses(fc);
+                                            }}>
+                                                Pilih
+                                            </Button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        <Button>{generateButton}</Button>
+                    </form>
                 </Popup>
             }
         </>

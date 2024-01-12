@@ -27,7 +27,7 @@ const HeaderPage = ({expand = true, title = ''}) => {
     useEffect(() => {
         if (hasLoggedIn === null) {
             let u = JSON.parse(window.localStorage.getItem('user_data'));
-            if (u !== null) {
+            if (u !== null && u !== 'unauthenticated') {
                 setHasLoggedIn(true);
                 setUser(u);
             }

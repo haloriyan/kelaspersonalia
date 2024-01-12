@@ -10,9 +10,9 @@ const CardContainer = ({children}) => {
     )
 }
 
-const Card = ({number, label, link, icon = null}) => {
+const Card = ({number, label, link, icon = null, style}) => {
     return (
-        <a href={link} className={styles.Card}>
+        <a href={link} className={styles.Card} style={style}>
             <div className={styles.CardNumber}>{number}</div>
             <div className={styles.CardBottom}>
                 {icon}

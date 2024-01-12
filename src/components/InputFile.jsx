@@ -26,7 +26,7 @@ const getExtension = (name) => {
 
 const imageExtensions = ['png','jpg','bmp','gif','jpeg'];
 
-const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', label = 'Pilih Berkas...', labelStyle, align = 'left', autoClear = false, onChange}) => {
+const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', iconSize = '30%', label = 'Pilih Berkas...', labelStyle, align = 'left', autoClear = false, onChange, width = null, height = null, style}) => {
     const thisRef = useRef(null);
     const prevArea = useRef(null);
     const theAligns = {
@@ -34,17 +34,25 @@ const InputFile = ({aspectRatio = '1/1', type = 'image', size = '80px', label = 
         center: 'center',
         right: 'flex-end',
     };
-    const defaultStyle = {
+    let defaultStyle = {
         height: size,
         aspectRatio: aspectRatio,
+        ...style
     };
+
+    if (width !== null && height !== null) {
+        defaultStyle = {
+            height: height,width: width,
+            ...style
+        }
+    }
 
     return (
         <div className={styles.Container} style={{
-            justifyContent: theAligns[align]
+            justifyContent: theAligns[align],
         }}>
             <div className={`${styles.Area}`} style={defaultStyle} ref={prevArea}>
-                <BiImageAdd size={'30%'} />
+                <BiImageAdd size={iconSize} />
                 {
                     label !== "" &&
                     <div style={labelStyle}>{label}</div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeaderPage from "../partials/HeaderPage";
-import styles from "./styles/Enroll.module.css";
+import styles from "./styles/EnrollCourse.module.css";
 import axios from "axios";
 import config from "../config";
 import { useNavigate, useParams } from "react-router-dom";

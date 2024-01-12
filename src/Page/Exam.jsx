@@ -58,6 +58,7 @@ const Exam = () => {
                 let qs = res.course.quiz.questions;
                 let qID = res.course.quiz.id;
                 setQuestions(qs);
+                setQuizID(qID);
                 let a = [];
 
                 let temp = JSON.parse(window.localStorage.getItem(`answer_temp_${enroll.id}`));
@@ -81,7 +82,17 @@ const Exam = () => {
 
     const chooseOption = (index, value) => {
         let as = [...answers];
-        as[index].answer = value;
+        if (as[index] === undefined) {
+            as.push({
+                quiz_id: quizID,
+                question_id: questions[index].id,
+                user_id: user.id,
+                answer: value,
+                is_correct: null,
+            })
+        } else {
+            as[index].answer = value;
+        }
         window.localStorage.setItem(`answer_temp_${enroll.id}`, JSON.stringify(as));
         setAnswers(as);
     }
@@ -113,7 +124,7 @@ const Exam = () => {
                                             {
                                                 JSON.parse(quest.options).map((opt, o) => (
                                                     <div key={o} className={styles.Option} onClick={() => chooseOption(questionIndex, opt)}>
-                                                        <Radio active={answers[questionIndex].answer === opt} label={null} />
+                                                        <Radio active={answers[questionIndex]?.answer === opt} label={null} />
                                                         {opt}
                                                     </div>
                                                 ))

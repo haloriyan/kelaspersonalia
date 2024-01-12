@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
 }
-.VideoArea {
+.LeftArea {
     width: 60%;
     min-width: 60%;
     background-color: #000;
@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: center;
 }
+.LeftArea iframe { height: 100%; }
 .VideoControl {
     position: absolute;
     top: 0px;left: 0px;right: 0px;bottom: 0px;
@@ -26,7 +27,7 @@
     opacity: 0.01;
     transition: 0.4s;
 }
-.VideoArea:hover .VideoControl { opacity: 1; }
+.LeftArea:hover .VideoControl { opacity: 1; }
 .ControlButton {
     height: 60px;
     font-size: 12px;
@@ -75,7 +76,7 @@
         display: flex;
         flex-direction: column;
     }
-    .VideoArea {
+    .LeftArea {
         width: 100%;
     }
     .ControlButton {

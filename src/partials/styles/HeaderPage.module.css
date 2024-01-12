@@ -90,6 +90,7 @@
     border-radius: 8px;
     display: flex;
     flex-direction: row;
+    margin-top: 0px;
 }
 .SearchInput {
     background: none;

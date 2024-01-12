@@ -1,0 +1,20 @@
+.Area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.Box {
+    aspect-ratio: 1;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    border-radius: 6px;
+    padding: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.BoxInner {
+    width: 100%;
+    aspect-ratio: 1;
+}

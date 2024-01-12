@@ -70,11 +70,13 @@
     border-radius: 8px;
     border: 1px solid #ddd;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     padding: 20px;
+    padding-top: 0px;
     margin-top: 20px;
 }
 .MateriItem {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     gap: 20px;

@@ -13,9 +13,9 @@ const Footer = () => {
             <div className={styles.Section}>
                 <div className={styles.Title}>Laman</div>
                 <div className={styles.LinkArea}>
-                    <a href="#" className={styles.Link}>Tentang</a>
-                    <a href="#" className={styles.Link}>Kebijakan</a>
-                    <a href="#" className={styles.Link}>Hubungi</a>
+                    <a href="/tentang" className={styles.Link}>Tentang</a>
+                    <a href="/kebijakan" className={styles.Link}>Kebijakan</a>
+                    <a href="/hubungi-kami" className={styles.Link}>Hubungi</a>
                 </div>
             </div>
         </div>

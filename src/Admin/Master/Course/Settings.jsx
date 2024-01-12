@@ -25,6 +25,8 @@ const CourseSettings = () => {
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [cover, setCover] = useState(null);
+    const [minCompleteMod, setMinCompleteMod] = useState(0);
+    const [minCorrect, setMinCorrect] = useState(0);
 
     const [isDeletingCourse, setDeletingCourse] = useState(false);
 
@@ -57,6 +59,8 @@ const CourseSettings = () => {
                 setDescription(cour.description);
                 setCategory(cour.category);
                 setCover(cour.cover_image);
+                setMinCompleteMod(cour.minimum_completing_modul);
+                setMinCorrect(cour.minimum_correct_answer);
             })
         }
     }, [isLoading, admin]);
@@ -75,6 +79,8 @@ const CourseSettings = () => {
         formData.append('description', description);
         formData.append('category', category);
         formData.append('cover', cover);
+        formData.append('minimum_correct_answer', minCorrect);
+        formData.append('minimum_completing_modul', minCompleteMod);
 
         axios.post(`${config.baseUrl}/api/course/${id}/update`, formData)
         .then(response => {
@@ -124,15 +130,30 @@ const CourseSettings = () => {
                         }
                     </select>
 
-                    <div style={{display: 'flex',justifyContent: 'flex-end',flexDirection: 'row'}}>
+                    <div className="inline" style={{marginTop: 20}}>
+                        <div style={{display: 'flex',flexGrow: 1,flexDirection: 'column'}}>
+                            <div style={{fontWeight: 700,marginBottom: 5}}>Penyelesaian Modul</div>
+                            <div style={{fontSize: 14,color: '#666'}}>Persentase minimum untuk dianggap selesai menyelesaikan modul</div>
+                        </div>
+                        <Input label="Persentase Penyelesaian" right={'%'} value={minCompleteMod} onInput={e => setMinCompleteMod(e.currentTarget.value)} required />
+                    </div>
+                    <div className="inline" style={{marginTop: 20}}>
+                        <div style={{display: 'flex',flexGrow: 1,flexDirection: 'column'}}>
+                            <div style={{fontWeight: 700,marginBottom: 5}}>Jawaban Benar</div>
+                            <div style={{fontSize: 14,color: '#666'}}>Jumlah minimum jawaban yang benar saat mengisi uji kompetensi</div>
+                        </div>
+                        <Input label="Minimal Jawaban Benar" value={minCorrect} onInput={e => setMinCorrect(e.currentTarget.value)} required />
+                    </div>
+
+                    <div style={{display: 'flex',justifyContent: 'flex-end',flexDirection: 'row',marginTop: 20}}>
                         <Button>Simpan Perubahan</Button>
                     </div>
                 </form>
 
                 <Separator margin="50px 0px" />
 
-                <div className="inline">
-                    <div style={{display: 'flex',flexGrow: 1}}>
+                <div className="inline" style={{marginTop: 40}}>
+                    <div style={{display: 'flex',flexGrow: 1,flexDirection: 'column'}}>
                         <div style={{fontWeight: 700,marginBottom: 5}}>Hapus Pelatihan</div>
                         <div style={{fontSize: 14,color: '#666'}}>Semua data terkait akan dihapus dan tindakan ini tidak dapat dipulihkan</div>
                     </div>
@@ -142,6 +163,8 @@ const CourseSettings = () => {
                         Hapus
                     </Button>
                 </div>
+
+                <div style={{height: 40}}></div>
             </div>
 
             {

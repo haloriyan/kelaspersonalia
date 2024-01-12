@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./styles/Learn.module.css";
-import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import HeaderPage from "../partials/HeaderPage";
+import useUser from "../Hooks/useUser";
 import axios from "axios";
 import config from "../config";
-import HeaderPage from "../partials/HeaderPage";
+import styles from "./styles/Learn.module.css";
 import Radio from "../components/Radio";
 import Separator from "../components/Separator";
-import { BiFastForward, BiPause, BiPlay, BiRewind } from "react-icons/bi";
+import { BiFastForward, BiFile, BiPause, BiPlay, BiRewind } from "react-icons/bi";
+import InArray from "../components/InArray";
+import Button from "../components/Button";
 
 const getDuration = duration => {
     let menit = duration / 60;
@@ -15,70 +18,79 @@ const getDuration = duration => {
 }
 
 const Learn = () => {
-    const { enrollID } = useParams();
-    const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [index, setIndex] = useState(searchParams.get('i'));
+    const { modulID, enrollID } = useParams();
+    const [user, setUser] = useUser();
     const [isLoading, setLoading] = useState(true);
-    const [hittingPath, setHittingPath] = useState(false);
+
+    const [modul, setModul] = useState(null);
+    const [progress, setProgess] = useState([0]);
+    const [totalProgress, setTotalProgress] = useState(0);
+    const [contents, setContents] = useState([]);
+    const [contentIndex, setContentIndex] = useState(0);
+    const [ableToChange, setAbleToChange] = useState(false);
+    const [docPageNumber, setDocPageNumber] = useState(1);
+
     const videoRef = useRef(null);
-    const [material, setMaterial] = useState(null);
-    const [pageTitle, setPageTitle] = useState('Materi Pelatihan');
-
-    const [enroll, setEnroll] = useState(null);
-    const [user, setUser] = useState(null);
+    const documentRef = useRef(null);
 
     useEffect(() => {
-        document.title = `${pageTitle} - Kelas Personalia`;
-    })
+        let interval = setInterval(() => {
+            let ability = window.localStorage.getItem('able_to_change');
+            setAbleToChange(ability === "1");
+        }, 500);
 
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyboard);
-        return () => document.removeEventListener('keydown', handleKeyboard);
+        return () => clearInterval(interval);
     }, []);
 
+    // handling video
     useEffect(() => {
-        if (user === null) {
-            setUser(
-                JSON.parse(window.localStorage.getItem('user_data'))
-            );
+        if (videoRef.current !== null) {
+            let duration = Math.floor(videoRef.current?.duration);
+            let interval = setInterval(() => {
+                let currentTime = Math.floor(videoRef.current?.currentTime);
+
+                if ((duration - currentTime) < 3) {
+                    setAbleToChange(true);
+                } else {
+                    setAbleToChange(false);
+                }
+            }, 1000);
+            
+            return () => clearInterval(interval);
         }
-    }, [user]);
+    }, [videoRef])
 
     useEffect(() => {
         if (isLoading && user !== null) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/page/learn`, {
                 enroll_id: enrollID,
-                hit_path: false,
+                modul_id: modulID,
+                token: user?.token,
             })
             .then(response => {
                 let res = response.data;
-                let material = res.enroll.course.materials[index];
-                if (res.enroll.user_id !== user.id) {
-                    navigate('/error/401');
-                }
-                setEnroll(res.enroll);
-                setMaterial(material);
-                setHittingPath(true);
-                setPageTitle(`${material.title}`);
-            })
-        }
-    }, [isLoading, user]);
+                setModul(res.modul);
+                let totProg = 0;
+                totProg += res.modul.documents.length;
+                totProg += res.modul.videos.length;
+                setTotalProgress(totProg);
 
-    useEffect(() => {
-        if (hittingPath && material !== null) {
-            setHittingPath(false);
-            axios.post(`${config.baseUrl}/api/page/learn`, {
-                enroll_id: enrollID,
-                material_id: material.id,
-                hit_path: true,
-            })
-            .then(response => {
-                let res = response.data;
+                let theContents = [];
+                res.modul.documents.map(doc => {
+                    let theDoc = doc;
+                    theDoc['content_type'] = 'document';
+                    theContents.push(theDoc);
+                });
+                res.modul.videos.map(vid => {
+                    let theVid = vid;
+                    theVid['content_type'] = 'video';
+                    theContents.push(vid);
+                });
+                setContents(theContents);
             })
         }
-    }, [hittingPath, material]);
+    }, [isLoading]);
 
     const togglePlayPause = () => {
         if (videoRef.current.paused) {
@@ -87,54 +99,90 @@ const Learn = () => {
             videoRef.current.pause();
         }
     }
-    const handleKeyboard = (event) => {
-        if (event.key === " ") {
-            togglePlayPause();
+
+    const done = () => {
+        axios.post(`${config.baseUrl}/api/page/learn/done`, {
+            modul_id: modulID,
+            enroll_id: enrollID, 
+        })
+        .then(response => {
+            let res = response.data;
+        })
+    }
+    const changeContent = (targetIndex) => {
+        setContentIndex(targetIndex);
+        let prog = [...progress];
+        if (!InArray(targetIndex, progress)) {
+            prog.push(targetIndex);
+        }
+        setProgess(prog);
+
+        if (prog.length >= totalProgress) {
+            done();
+        }
+        setAbleToChange(false);
+    }
+    const getChangeContentCondition = (targetIndex) => {
+        if (targetIndex > contentIndex) {
+            if (!InArray(targetIndex, progress)) {
+                if (ableToChange) {
+                    changeContent(targetIndex);
+                }
+            } else {
+                changeContent(targetIndex);
+            }
+        } else {
+            changeContent(targetIndex);
         }
     }
 
     return (
         <>
             <HeaderPage />
-            {
-                (enroll !== null && material !== null) &&
-                <div className="content" style={{top: 75}}>
+            <div className="content">
+                {
+                    contents.length > 0 &&
                     <div className={styles.Top}>
-                        <div className={styles.VideoArea}>
-                            <video className={styles.Player} ref={videoRef}>
-                                <source src={`${config.baseUrl}/api/page/stream/${material.id}`} />
-                            </video>
-                            <div className={styles.VideoControl}>
-                                <div className={styles.ControlButton} onClick={() => {
-                                    videoRef.current.currentTime -= 5;
-                                }}>
-                                    <BiRewind size={24} />
-                                </div>
-                                <div className={styles.ControlButton} onClick={togglePlayPause}>
-                                    <BiPlay size={24} />/<BiPause size={24} />
-                                </div>
-                                <div className={styles.ControlButton} onClick={() => {
-                                    videoRef.current.currentTime += 5;
-                                }}>
-                                    <BiFastForward size={24} />
+                        {
+                            contents[contentIndex].content_type === 'document' &&
+                            <div className={styles.LeftArea}>
+                                <iframe src={`/pdf-view/${contents[contentIndex].filename}`} ref={documentRef} width={'100%'} frameBorder={0}></iframe>
+                            </div>
+                        }
+                        {
+                            contents[contentIndex].content_type === 'video' &&
+                            <div className={styles.LeftArea}>
+                                <video className={styles.Player} ref={videoRef}>
+                                    <source src={`${config.baseUrl}/api/page/stream/${contents[contentIndex].id}`} />
+                                </video>
+                                <div className={styles.VideoControl}>
+                                    <div className={styles.ControlButton} onClick={togglePlayPause}>
+                                        <BiPlay size={24} />/<BiPause size={24} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                         <div className={styles.Right}>
                             <h3 style={{margin: 0}}>Materi</h3>
                             <div className={styles.MaterialContainer}>
                                 {
-                                    enroll.course.materials.map((mat, m) => (
+                                    contents.map((cont, c) => (
                                         <>
-                                            <a href={`/learn/${enrollID}?i=${m}`} className={styles.MaterialItem} key={m}>
-                                                <Radio active={m == index} label={null} />
+                                            <div className={styles.MaterialItem} key={c} onClick={() => {
+                                                changeContent(c)
+                                            }}>
+                                                <Radio active={c == contentIndex} label={null} />
                                                 <div style={{display: 'flex',flexDirection: 'column',gap: 5,flexGrow: 1}}>
-                                                    <div>{mat.title}</div>
-                                                    <div style={{fontSize: 12,color: '#666'}}>{getDuration(mat.duration)}</div>
+                                                    <div>{cont.title}</div>
+                                                    {
+                                                        cont.content_type === 'video' &&
+                                                        <div style={{fontSize: 12,color: '#666'}}>{getDuration(cont.duration)}</div>
+                                                    }
                                                 </div>
-                                            </a>
+                                                <Button height={30} accent="secondary">Buka</Button>
+                                            </div>
                                             {
-                                                m !== enroll.course.materials.length - 1 &&
+                                                c !== contents.length - 1 &&
                                                 <Separator margin="0px" />
                                             }
                                         </>
@@ -143,13 +191,19 @@ const Learn = () => {
                             </div>
                         </div>
                     </div>
+                }
 
+                {
+                    modul !== null &&
                     <div className="inner_content">
-                        <h2>{material.title}</h2>
-                        <pre className={styles.Description}>{material.description}</pre>
+                        <div className="inline" style={{marginBottom: 40}}>
+                            <h3 style={{margin: 0,display: 'flex',flexGrow: 1}}>{contents[contentIndex].title}</h3>
+                        </div>
+                        <div style={{fontSize: 12,color: '#666',marginBottom: 5}}>Deskripsi Modul</div>
+                        <div>{modul.description}</div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </>
     )
 }

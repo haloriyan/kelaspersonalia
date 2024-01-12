@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles/CourseMenu.module.css";
-import { BiCertification, BiChevronLeft, BiCog, BiEdit, BiFile, BiGroup, BiHome, BiImage, BiListUl, BiParagraph } from "react-icons/bi";
+import { BiCalendar, BiCertification, BiChevronLeft, BiCog, BiEdit, BiFile, BiGroup, BiHome, BiImage, BiListUl, BiParagraph, BiTime } from "react-icons/bi";
 import Separator from "../components/Separator";
 import Substring from "../components/Substring";
 
@@ -22,13 +22,17 @@ const CourseMenu = ({active, course = null}) => {
                         <BiHome />
                         <div className={styles.MenuText}>Dashboard</div>
                     </a>
-                    <a href={`/admin/master/course/${course.id}/materi`} className={`${styles.MenuItem} ${active === 'materi' ? styles.MenuActive : ''}`}>
+                    <a href={`/admin/master/course/${course.id}/modul`} className={`${styles.MenuItem} ${active === 'modul' ? styles.MenuActive : ''}`}>
                         <BiFile />
-                        <div className={styles.MenuText}>Materi</div>
+                        <div className={styles.MenuText}>Modul</div>
                     </a>
-                    <a href={`/admin/master/course/${course.id}/media`} className={`${styles.MenuItem} ${active === 'media' ? styles.MenuActive : ''}`}>
-                        <BiImage />
-                        <div className={styles.MenuText}>Media</div>
+                    <a href={`/admin/master/course/${course.id}/batch`} className={`${styles.MenuItem} ${active === 'batch' ? styles.MenuActive : ''}`}>
+                        <BiCalendar />
+                        <div className={styles.MenuText}>Batch</div>
+                    </a>
+                    <a href={`/admin/master/course/${course.id}/pengajar`} className={`${styles.MenuItem} ${active === 'pengajar' ? styles.MenuActive : ''}`}>
+                        <BiGroup />
+                        <div className={styles.MenuText}>Pengajar</div>
                     </a>
                     <a href={`/admin/master/course/${course.id}/certificate`} className={`${styles.MenuItem} ${active === 'certificate' ? styles.MenuActive : ''}`}>
                         <BiCertification />
@@ -50,7 +54,7 @@ const CourseMenu = ({active, course = null}) => {
                         <BiListUl />
                         <div className={styles.MenuText}>List Pertanyaan</div>
                     </a>
-                    <a href="/event/booking" className={`${styles.MenuItem} ${active === 'booking' ? styles.MenuActive : ''}`}>
+                    <a href={`/admin/master/course/${course.id}/exam/answer`} className={`${styles.MenuItem} ${active === 'answer' ? styles.MenuActive : ''}`}>
                         <BiEdit />
                         <div className={styles.MenuText}>Jawaban</div>
                     </a>

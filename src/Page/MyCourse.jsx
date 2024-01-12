@@ -51,7 +51,7 @@ const MyCourse = () => {
                                 let percentage = enr.paths.length / course.materials.length * 100;
                                 return (
                                     <div key={e} className={styles.Container}>
-                                        <a href={`/learn/${enr.id}?i=0`} key={e} className={styles.Item}>
+                                        <a href={`/enroll/${enr.id}`} key={e} className={styles.Item}>
                                             <img src={`${config.baseUrl}/storage/cover_images/${course.cover_image}`} alt={course.title} className={styles.Cover} />
                                             <div style={{display: 'flex',flexDirection: 'column',flexGrow: 1,gap: 10}}>
                                                 <div className={styles.CourseTitle}>{course.title}</div>
@@ -67,7 +67,7 @@ const MyCourse = () => {
                                         </a>
                                         {
                                             percentage === 0 &&
-                                            <Button onClick={() => navigate(`/learn/${enr.id}?i=0`)}>
+                                            <Button onClick={() => navigate(`/enroll/${enr.id}`)}>
                                                 Mulai
                                             </Button>
                                         }
@@ -79,7 +79,7 @@ const MyCourse = () => {
                                         }
                                         {
                                             (percentage > 0 && percentage< 100) &&
-                                            <Button accent="secondary" onClick={() => navigate(`/learn/${enr.id}?i=0`)}>
+                                            <Button accent="secondary" onClick={() => navigate(`/enroll/${enr.id}`)}>
                                                 Lanjutkan
                                             </Button>
                                         }

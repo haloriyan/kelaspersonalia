@@ -31,8 +31,10 @@ const CourseCertificate = () => {
                 let res = response.data;
                 setCertificate(res.certificate);
                 setCourse(res.course);
-                setFontProps(JSON.parse(res.certificate.font_properties));
+                if (res.certificate !== null) {
+                    setFontProps(JSON.parse(res.certificate.font_properties));
                 setPosition(res.certificate.position);
+                }
             })
         }
     }, [isLoading]);
@@ -77,8 +79,8 @@ const CourseCertificate = () => {
                 {
                     certificate === null ?
                     <form action="#" onSubmit={uploadCertificate}>
-                        <InputFile onChange={(input, e)=> setCert(input.files[0])} size={250} aspectRatio="16/9" align="center" />
-                        <div style={{display: 'flex',justifyContent: 'center'}}>
+                        <InputFile onChange={(input, e)=> setCert(input.files[0])} size={250} aspectRatio="16/9" />
+                        <div style={{display: 'flex',justifyContent: 'flex-start'}}>
                             <Button>Upload Template</Button>
                         </div>
                     </form>

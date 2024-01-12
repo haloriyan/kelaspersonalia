@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import config from "../../../config";
 import Button from "../../../components/Button";
-import { BiCog, BiTrash, BiX } from "react-icons/bi";
+import { BiCog, BiPlus, BiTrash, BiX } from "react-icons/bi";
 import Popup from "../../../components/Popup";
 import Input from "../../../components/Input";
 import styles from "../../styles/Course.module.css";
 import InputFile from "../../../components/InputFile";
+import alertStyles from "../../../components/styles/Alert.module.css";
 
 const CourseExam = () => {
     const { id } = useParams();
@@ -22,9 +23,9 @@ const CourseExam = () => {
     const [quiz, setQuiz] = useState(null);
 
     const [type, setType] = useState('option');
-    const [body, setBody] = useState('What is the capital of Thailand?');
+    const [body, setBody] = useState('');
     const [expected, setExpected] = useState('');
-    const [options, setOptions] = useState(['Bangkok', 'Bangdik', 'Bangpusi', 'Bangtits']);
+    const [options, setOptions] = useState(['', '', '', '']);
     const [img, setImg] = useState(null);
 
     const [isAdding, setAdding] = useState(false);
@@ -80,6 +81,15 @@ const CourseExam = () => {
         e.preventDefault();
     }
 
+    const syncMinimumCorrect = () => {
+        axios.post(`${config.baseUrl}/api/course/${id}/exam/sync-counter`, {
+            count: questions.length
+        })
+        .then(response => {
+            setLoading(true);
+        });
+    }
+
     return (
         <>
             <Header />
@@ -94,7 +104,7 @@ const CourseExam = () => {
                     {
                         (controllable && quiz !== null) &&
                         <Button accent="secondary" circle onClick={() => setAdding(true)}>
-                            <BiCog />
+                            <BiPlus />
                         </Button>
                     }
                 </div>
@@ -143,12 +153,23 @@ const CourseExam = () => {
                     </tbody>
                 </table>
 
-                {
-                    controllable &&
-                    <Button accent="secondary" onClick={() => setAdding(true)}>
-                        Tambah
-                    </Button>
-                }
+                <div className="inline">
+                    {
+                        controllable &&
+                        <Button accent="secondary" onClick={() => setAdding(true)}>
+                            Tambah
+                        </Button>
+                    }
+                    {
+                        (course !== null && course?.minimum_correct_answer !== questions.length) &&
+                        <div className={`${alertStyles.Area} ${alertStyles.Color_4} inline`} style={{margin: 0,flexGrow: 1,fontSize: 12}}>
+                            <div style={{display: 'flex',flexGrow: 1}}>
+                                Jumlah Pertanyaan dan pengaturan Minimum Jawaban Benar tidak sama.
+                            </div>
+                            <Button height={32} style={{fontSize: 12}} onClick={syncMinimumCorrect}>Selaraskan</Button>
+                        </div>
+                    }
+                </div>
             </div>
 
             {

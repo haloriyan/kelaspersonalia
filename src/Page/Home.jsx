@@ -45,7 +45,7 @@ const Home = () => {
                             Temukan cara memanage organisasi yang bisa membuat perusahaan Anda bertumbuh
                         </h2>
                         <div style={{display: 'flex',flexDirection: 'row'}}>
-                            <button className={styles.JumboButton}>Lihat Kelas</button>
+                            <a href="#courses_area" className={styles.JumboButton}>Lihat Kelas</a>
                         </div>
                     </div>
                     <div className={styles.JumboIconArea}>
@@ -67,7 +67,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className={styles.Section}>
+                <div className={styles.Section} id="courses_area">
                     <h3 style={{marginTop: 0}}>Pelatihan Terbaru</h3>
                     <div className={courseStyles.ListContainer}>
                         {
