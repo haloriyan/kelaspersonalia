@@ -1,7 +1,11 @@
 .Area {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 40px;
+}
+.Content {
+    width: 40%;
 }
 .CourseCard {
     padding: 20px;
@@ -74,5 +78,8 @@
 @media (max-width: 480px) {
     .Area {
         flex-direction: column;
+    }
+    .Content {
+        width: 90%;
     }
 }
