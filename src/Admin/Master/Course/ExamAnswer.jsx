@@ -13,6 +13,10 @@ const ExamAnswer = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
+        document.title = `Hasil Uji Kompetensi - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(true);
             axios.post(`${config.baseUrl}/api/course/${id}/exam/answer`)

@@ -1,0 +1,51 @@
+.CoverContainer {
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.CoverImage {
+    width: 65%;
+    aspect-ratio: 5/2;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.CoverContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    padding: 25px;
+    border-radius: 12px;
+}
+.CoverInfoContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 10px;
+}
+.CoverTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 20px;
+}
+.CoverInfo {
+    gap: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+@media (max-width: 480px) {
+    .CoverContainer {
+        padding: 20px;
+        gap: 20px;
+        flex-direction: column;
+    }
+    .CoverImage {
+        width: 100%;
+    }
+    .CoverInfoContainer {
+        margin-bottom: 20px;
+    }
+}

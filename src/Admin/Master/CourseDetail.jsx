@@ -19,6 +19,10 @@ const CourseDetail = () => {
     const [completeds, setCompleteds] = useState([]);
 
     useEffect(() => {
+        document.title = `Dashboard - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (admin === null) {
             setAdmin(JSON.parse(window.localStorage.getItem('admin_data')));
         }

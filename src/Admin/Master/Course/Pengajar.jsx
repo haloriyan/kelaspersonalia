@@ -26,6 +26,10 @@ const CoursePengajar = () => {
     const [isDeleting, setDeleting] = useState(false);
 
     useEffect(() => {
+        document.title = `Pengajar - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/course/${id}/pengajar`)

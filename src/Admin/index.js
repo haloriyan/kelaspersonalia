@@ -25,6 +25,7 @@ import CourseBatch from "./Master/Course/Batch";
 import Berita from "./Master/Berita";
 import ExamAnswer from "./Master/Course/ExamAnswer";
 import ContactMessage from "./ContactMessage";
+import EventDetail from "./Master/Course/EventDetail";
 
 const AdminRouter = () => {
     return (
@@ -45,6 +46,7 @@ const AdminRouter = () => {
             <Route path="/admin/master/course/:id/media" element={<AdminMiddleware><CourseMedia /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/certificate" element={<AdminMiddleware><CourseCertificate /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/event" element={<AdminMiddleware><CourseEvent /></AdminMiddleware>} />
+            <Route path="/admin/master/course/:id/event/:eventID" element={<AdminMiddleware><EventDetail /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/settings" element={<AdminMiddleware><CourseSettings /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/exam" element={<AdminMiddleware><CourseExam /></AdminMiddleware>} />
             <Route path="/admin/master/course/:id/exam/answer" element={<AdminMiddleware><ExamAnswer /></AdminMiddleware>} />

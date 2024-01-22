@@ -19,6 +19,10 @@ const CourseParticipant = () => {
     const [enrolls, setEnrolls] = useState([]);
 
     useEffect(() => {
+        document.title = `Peserta Pelatihan - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (admin === null) {
             setAdmin(JSON.parse(window.localStorage.getItem('admin_data')));
         }

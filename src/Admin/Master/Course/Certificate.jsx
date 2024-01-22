@@ -24,6 +24,10 @@ const CourseCertificate = () => {
     const [cert, setCert] = useState(null);
 
     useEffect(() => {
+        document.title = `Sertifikat - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/course/${id}/certificate`)

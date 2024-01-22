@@ -10,6 +10,7 @@ import Thread from "./Course/Thread";
 import Enroll from "./Enroll";
 import EnrollCourse from "./EnrollCourse";
 import Error from "./Error";
+import Event from "./Event";
 import Exam from "./Exam";
 import Home from "./Home";
 import Learn from "./Learn";
@@ -29,6 +30,7 @@ const PageRouter = () => {
             <Route path="/pdf-view/:filename" Component={PdfViewer} />
             <Route path="/error/:code" Component={Error} />
             <Route path="/course/:id" Component={Course} />
+            <Route path="/event/:id" Component={Event} />
 
             <Route path="/course/:id/forum" Component={CourseForum} />
             <Route path="/thread/:threadID" Component={Thread} />

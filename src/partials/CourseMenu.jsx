@@ -56,7 +56,7 @@ const CourseMenu = ({active, course = null}) => {
                     </a>
                     <a href={`/admin/master/course/${course.id}/exam/answer`} className={`${styles.MenuItem} ${active === 'answer' ? styles.MenuActive : ''}`}>
                         <BiEdit />
-                        <div className={styles.MenuText}>Jawaban</div>
+                        <div className={styles.MenuText}>Hasil Jawaban</div>
                     </a>
 
                     <div style={{color: '#999',fontSize: 12,fontWeight: 600,margin: '20px 0px 10px 0px'}}>

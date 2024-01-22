@@ -32,6 +32,10 @@ const CourseExam = () => {
     const [isDeleting, setDeleting] = useState(false);
 
     useEffect(() => {
+        document.title = `Pertanyaan Uji Kompetensi - ${config.appName}`;
+    }, []);
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/course/${id}/exam`)
@@ -98,7 +102,7 @@ const CourseExam = () => {
             <div className="content organizer">
                 <div className="inline">
                     <div style={{display: 'flex',flexDirection: 'column',flexGrow: 1}}>
-                        <h2 style={{margin: 0}}>Pertanyaan Ujian</h2>
+                        <h2 style={{margin: 0}}>Pertanyaan Uji Kompetensi</h2>
                         <div style={{fontSize: 14,color: '#666',marginTop: 5}}>Daftar pertanyaan yang akan dijawab setelah penyelesaian</div>
                     </div>
                     {

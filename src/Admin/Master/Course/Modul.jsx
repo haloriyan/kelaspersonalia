@@ -38,6 +38,10 @@ const CourseModul = () => {
     const [isAdding, setAdding] = useState(false);
 
     useEffect(() => {
+        document.title = `Modul - ${config.appName}`
+    }, []);
+
+    useEffect(() => {
         if (isLoading) {
             setLoading(false);
             axios.post(`${config.baseUrl}/api/course/${id}/modul`)

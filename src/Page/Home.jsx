@@ -5,8 +5,9 @@ import axios from "axios";
 import config from "../config";
 import Footer from "../partials/Footer";
 import courseStyles from "../Admin/styles/Course.module.css";
-import { BiListCheck, BiTime } from "react-icons/bi";
+import { BiCalendar, BiChalkboard, BiListCheck, BiTime } from "react-icons/bi";
 import Substring from "../components/Substring";
+import moment from "moment";
 
 const getDuration = duration => {
     let menit = duration / 60;
@@ -18,6 +19,7 @@ const Home = () => {
     const [isLoading, setLoading] = useState(true);
     const [categories, setCategories] = useState([]);
     const [courses, setCourses] = useState([]);
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
         document.title = "Home - Kelas Personalia"
@@ -31,6 +33,7 @@ const Home = () => {
                 let res = response.data;
                 setCategories(res.categories);
                 setCourses(res.courses);
+                setEvents(res.events);
             })
         }
     }, [isLoading]);
@@ -92,6 +95,34 @@ const Home = () => {
                         }
                     </div>
                 </div>
+
+                {
+                    events.length > 0 &&
+                    <div className={styles.Section}>
+                        <h3 style={{marginTop: 0}}>Ikuti Webinar</h3>
+                        <div className={courseStyles.ListContainer}>
+                            {
+                                events.map((evt, e) => (
+                                    <a href={`/event/${evt.id}`} key={e} className={courseStyles.ListItem} style={{
+                                        flexBasis: '18%',
+                                        maxWidth: '20%'
+                                    }}>
+                                        <img src={`${config.baseUrl}/storage/event_covers/${evt.cover}`} alt={evt.title} className={courseStyles.CourseCover} />
+                                        <div className={courseStyles.CourseTitle} style={{marginBottom: 10}}>{Substring(evt.title, 8, true)}</div>
+                                        <div className={courseStyles.InfoItem}>
+                                            <BiCalendar />
+                                            {moment(evt.start_date).format('DD MMM')}
+                                        </div>
+                                        <div className={courseStyles.InfoItem} style={{marginTop: 5}}>
+                                            <BiChalkboard />
+                                            {evt.course.title}
+                                        </div>
+                                    </a>
+                                ))
+                            }
+                        </div>
+                    </div>
+                }
 
                 <Footer />
             </div>
